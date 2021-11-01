@@ -1,0 +1,194 @@
+<div class="container-fluid height-flex-100 pb-3 pt-3">
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Button</div>
+
+    <div class="card-body">
+      <button type="button" class="btn btn-primary" (click)="onBtnClick($event)">Do Smth</button>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Dropdown</div>
+
+    <div class="card-body">
+      <div ngbDropdown class="d-inline-block">
+        <button class="btn btn-outline-primary" ngbDropdownToggle>Toggle dropdown</button>
+        <div ngbDropdownMenu>
+          <button ngbDropdownItem>Dropdown Item 1</button>
+          <button ngbDropdownItem>Dropdown Item 2</button>
+          <button ngbDropdownItem>Dropdown Item 3</button>
+        </div>
+      </div>
+      <div class="btn-group float-right">
+        <button type="button" class="btn btn-primary">Label</button>
+        <div class="btn-group" ngbDropdown role="group" aria-label="Button group with nested dropdown">
+          <button class="btn btn-primary dropdown-toggle-split" ngbDropdownToggle></button>
+          <div class="dropdown-menu" ngbDropdownMenu>
+            <a href="/" ngbDropdownItem class="btn btn-outline-secondary">Dropdown Item 1</a>
+            <a href="/" ngbDropdownItem class="btn btn-outline-secondary">Dropdown Item 2</a>
+            <a href="/" ngbDropdownItem class="btn btn-outline-secondary">Dropdown Item 3</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Tabs</div>
+
+    <div class="card-body">
+      <ul ngbNav class="nav-tabs" (navChange)="onTabChange($event)">
+        <li ngbNavItem *ngFor="let item of items; let $index = index" [id]="item.id" [disabled]="$index === 2">
+          <a ngbNavLink>{{item.title}}</a>
+          <ng-template ngbNavContent>content for item#{{$index + 1}}</ng-template>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Accordion</div>
+
+    <div class="card-body">
+      <ngb-accordion activeIds="ngb-panel-0">
+        <ngb-panel *ngFor="let item of items" [id]="item.title">
+          <ng-template ngbPanelHeader let-opened="opened">
+            <div class="d-flex align-items-center justify-content-between">
+              <button ngbPanelToggle class="btn btn-link p-0 ib-text-title">
+                <span class="oi caret" [ngClass]="{'oi-caret-bottom': opened, 'oi-caret-right': !opened}"></span>
+                {{ item.title }}
+              </button>
+            </div>
+          </ng-template>
+          <ng-template ngbPanelContent>
+            tab content for {{ item.title }}
+          </ng-template>
+        </ngb-panel>
+      </ngb-accordion>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Modal</div>
+
+    <div class="card-body">
+      <ng-template #modal1 let-modal>
+        <div class="modal-header">
+          <h4 class="modal-title" id="modal-basic-title">Modal Title</h4>
+        </div>
+        <div class="modal-body">
+          Modal Body
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-link" (click)="modal.close('Cancel click')">Cancel</button>
+          <button type="button" class="btn btn-primary" (click)="modal.close('Save click')">Save</button>
+        </div>
+      </ng-template>
+
+      <button class="btn btn-lg btn-outline-primary" (click)="openModal(modal1)">Open Modal</button>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Select</div>
+
+    <div class="card-body">
+      <div style="max-width: 300px">
+        <div>Selected Value: {{selectedValue}}</div>
+        <select [(ngModel)]="selectedValue"
+                class="form-control"
+                id="selectId"
+                placeholder="Choose smth">
+          <option *ngFor="let item of items" [ngValue]="item.title">
+            {{item.id}} - {{item.title}}
+          </option>
+        </select>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Multiselect</div>
+
+    <div class="card-body">
+      <oi-angular-select [(ngModel)]="multiselectValue"
+                         [models]="items"
+                         multiple
+                         id="multiselect1"
+                         size="sm"
+                         titlePlaceholder="title placeholder"
+                         trackField="title"
+                         searchField="title"></oi-angular-select>
+    </div>
+
+  </div>
+
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Switcher</div>
+
+    <div class="card-body">
+      <div class="form-group" style="max-width: 200px;">
+
+        <app-toggle-switch style="width: 60px; display: inline-block"
+                           [(ngModel)]="switcherValue"
+                           [options]="[[true, '', '.bg-danger'], [null, '', '.bg-warning', 'disabled'], [false, '', '.bg-success']]"></app-toggle-switch>
+
+<!--        <div class="switch-toggle-wrapper">-->
+<!--          <label class="control-label">Switcher Label</label>-->
+<!--          <div class="form-control" ngbRadioGroup-->
+<!--               [(ngModel)]="switcherValue"-->
+<!--               (ngModelChange)="onSwitcherChange($event)">-->
+<!--            <div class="switch-toggle">-->
+<!--              <input id="switch1" name="view" type="radio" ngbButtonLabel ngbButton [value]="true">-->
+<!--              <label for="switch1">Yes</label>-->
+
+<!--              <input id="switch2" name="view" type="radio" ngbButtonLabel ngbButton [value]="false">-->
+<!--              <label for="switch2">No</label>-->
+
+<!--              <a class="btn btn-primary"></a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+      </div>
+    </div>
+
+  </div>
+  <div class="card mb-3">
+
+    <div class="card-header ib-header">Datapicker</div>
+
+    <div class="card-body">
+      <div class="input-group" style="max-width: 300px;">
+        <input class="form-control" placeholder="yyyy-mm-dd"
+               name="dpFrom"
+               [(ngModel)]="dateValue"
+               ngbDatepicker #dp="ngbDatepicker"
+               (ngModelChange)="onDateChange($event)"
+               [maxDate]="today">
+        <div class="input-group-append">
+          <button class="btn btn-secondary calendar" (click)="dp.toggle()" type="button">
+            <span class="oi oi-calendar"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+
+
+</div>

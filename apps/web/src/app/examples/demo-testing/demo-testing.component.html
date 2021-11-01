@@ -1,0 +1,11 @@
+<div class="container">
+  <h1>Counter</h1>
+  <p>See test for more useful information</p>
+
+  <button class="btn btn-secondary" (click)="addCounter()">Add counter</button>
+
+  <div *ngFor="let counter of counters">
+    <app-demo-counter class="m-3"></app-demo-counter>
+  </div>
+
+</div>
